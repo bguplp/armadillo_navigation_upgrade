@@ -31,7 +31,7 @@ $ roslaunch armadillo_navigation_upgrade armadillo2.launch lidar:=true amcl:=tru
 ```
 ### simulation 
 
-* armadillo2
+#### armadillo2
 
 launch armadillo2:
 ```bash
@@ -43,7 +43,7 @@ run amcl and move_base API's with known map:
 $ roslaunch armadillo_navigation_upgrade armadillo_navigation_upgrade.launch amcl:=true have_map:=true move_base:=true map:="<paht_to_map>/<map_name.yaml>"
 ```
 
-dynamic reconfiguration for move_base, use the following commands:
+* dynamic reconfiguration for move_base, use the following commands:
 
 to navigate through doors, use:
 ```bash
@@ -55,7 +55,7 @@ for basics configuration, use:
 $ rosrun dynamic_cfg move_base_basic.py
 ```
 
-use navigation_services_for_simulation.py. 
+* use navigation_services_for_simulation.py. 
 
 run the file with:
 ```bash
@@ -65,7 +65,7 @@ and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
 
-* armadillo1
+#### armadillo1
 
 launch armadillo1:
 ```bash
@@ -77,7 +77,7 @@ run amcl and move_base API's with known map:
 $ roslaunch armadillo_navigation_upgrade armadillo_navigation_upgrade.launch amcl:=true have_map:=true move_base:=true map:="<paht_to_map>/<map_name.yaml>"
 ```
 
-dynamic reconfiguration for move_base, use the following commands:
+* dynamic reconfiguration for move_base, use the following commands:
 
 to navigate through doors, use:
 ```bash
@@ -89,7 +89,7 @@ for basics configuration, use:
 $ rosrun dynamic_cfg move_base_basic.py
 ```
 
-use navigation_services_for_simulation.py. 
+* use navigation_services_for_simulation.py. 
 
 run the file with:
 ```bash
@@ -98,10 +98,11 @@ $ rosrun armadillo_navigation_upgrade navigation_services_for_simulation.py
 and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
+```
 
 ### real robot 
 
-* armadillo2
+#### armadillo2
 
 launch armadillo2:
 ```bash
@@ -113,7 +114,7 @@ run amcl and move_base API's with known map:
 $ roslaunch armadillo_navigation_upgrade armadillo_navigation_upgrade.launch amcl:=true have_map:=true move_base:=true map:="<paht_to_map>/<map_name.yaml>"
 ```
 
-dynamic reconfiguration for move_base, use the following commands:
+* dynamic reconfiguration for move_base, use the following commands:
 
 to navigate through doors, use:
 ```bash
@@ -125,7 +126,7 @@ for basics configuration, use:
 $ rosrun dynamic_cfg move_base_basic.py
 ```
 
-use navigation_services_for_simulation.py. 
+* use navigation_services_for_simulation.py. 
 
 run the file with:
 ```bash
@@ -135,7 +136,7 @@ and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
 
-* armadillo1
+#### armadillo1
 
 launch armadillo1:
 ```bash
@@ -147,7 +148,7 @@ run amcl and move_base API's with known map:
 $ roslaunch armadillo_navigation_upgrade armadillo_navigation_upgrade.launch amcl:=true have_map:=true move_base:=true map:="<paht_to_map>/<map_name.yaml>"
 ```
 
-dynamic reconfiguration for move_base, use the following commands:
+* dynamic reconfiguration for move_base, use the following commands:
 
 to navigate through doors, use:
 ```bash
@@ -159,7 +160,7 @@ for basics configuration, use:
 $ rosrun dynamic_cfg move_base_basic.py
 ```
 
-use navigation_services_for_simulation.py. 
+* use navigation_services_for_simulation.py. 
 
 run the file with:
 ```bash
@@ -168,3 +169,4 @@ $ rosrun armadillo_navigation_upgrade navigation_services_for_simulation.py
 and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
+```
