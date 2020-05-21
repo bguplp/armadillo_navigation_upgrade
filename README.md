@@ -135,6 +135,7 @@ $ rosrun armadillo_navigation_upgrade navigation_services_for_simulation.py
 and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
+```
 
 #### armadillo1
 
