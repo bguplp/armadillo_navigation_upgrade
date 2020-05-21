@@ -24,7 +24,6 @@ $ cp armadillo_navigation_upgrade/launch/armadillo1_for_navigation_upgrade.launc
 
 ## runing
 
-
 for the real robot use:
 ```bash
 $ roslaunch armadillo_navigation_upgrade armadillo2.launch lidar:=true amcl:=true have_map:=true map:="<paht_to_map>/<map_name.yaml>" move_base:=true
@@ -64,6 +63,7 @@ $ rosrun armadillo_navigation_upgrade navigation_services_for_simulation.py
 and then call the service you need, for exmpel:
 ```bash
 $ rosservice call /elevator_go "{}"
+```
 
 #### armadillo1
 
