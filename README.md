@@ -8,6 +8,7 @@ First of all, clone the package to ~/catkin_ws/src. In new terminal use the comm
 $ cd $HOME/catkin_ws/src
 $ git clone https://github.com/bguplp/armadillo_navigation_upgrade.git
 $ sudo apt-get install ros-kinetic-teb-local-planner
+$ cd ..
 $ catkin_make
 ```
 * armadillo2
