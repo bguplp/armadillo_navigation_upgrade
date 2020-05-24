@@ -42,7 +42,7 @@
         <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/global_costmap" />
         <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/local_costmap" />
         <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/local_costmap_params.yaml" command="load" ns="move_base/local_costmap" />
-        <rosparam file="$(find armadillo2_navigation_upgrade)/navigation/config/global_costmap_params.yaml" command="load" ns="move_base/global_costmap"/>
+        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/global_costmap_params.yaml" command="load" ns="move_base/global_costmap"/>
     </group>
     
 </launch>
