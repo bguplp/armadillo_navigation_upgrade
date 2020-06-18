@@ -20,8 +20,8 @@
      <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/move_base_params.yaml" command="load"/>-->
 
-    <param name="local_costmap/width" value="4.0"/>
-    <param name="local_costmap/height" value="4.0"/> 
+    <param name="local_costmap/width" value="3.0"/>
+    <param name="local_costmap/height" value="3.0"/> 
 	<remap from="cmd_vel" to="nav_vel" />
         
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />

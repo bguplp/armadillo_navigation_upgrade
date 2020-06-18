@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+#  gazebo_msgs
   tf
 )
 
@@ -58,7 +59,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
+#   Gzstring.msg
 #   Message2.msg
 # )
 
@@ -79,7 +80,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   move_base_msgs#   std_msgs
+#   move_base_msgs
+#   std_msgs
 # )
 
 ################################################
@@ -128,6 +130,10 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+
+
+#add_executable(open_elevator_gate src/open_elevator_gate.cpp)
+#target_link_libraries(open_elevator_gate ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
