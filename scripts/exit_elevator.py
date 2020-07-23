@@ -13,7 +13,7 @@ import numpy as np
 from line_detector.srv import NextPositionInLineService, ser_message, ser_messageResponse
 from std_msgs.msg import String
 
-global z, error_max, num
+global z, error_max, num, node_name
 z = 0 
 num = -10
 error_max = 0
@@ -23,15 +23,10 @@ def get_scan(msg):
     z = np.array(msg.ranges)     
 
 def exit_elevator_func(req):
-    global z, error_max, num
+    global z, error_max, num, node_name
 
     rospy.Subscriber('/scan', LaserScan, get_scan)
-    node_name = rospy.wait_for_message("/inside_elevator_node_name", String)
-    success, fail = rosnode.kill_nodes([node_name.data])
-    rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
-    if fail != []:
-        rospy.logerr("The node: \"/inside_elevator\" is still alive")
-
+    
     # input_pose = PoseStamped()
     # input_pose.header.stamp = rospy.Time.now()
     # input_pose.header.frame_id = 'map'
@@ -77,6 +72,11 @@ def exit_elevator_func(req):
     temp_z = z
     # flag = True
     while (error_max < 1.5):
+
+        success, fail = rosnode.kill_nodes([node_name.data])
+        rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
+        if fail != []:
+            rospy.logerr("The node: \"/inside_elevator\" is still alive")
         
         error = np.absolute(z - temp_z)
         temp_z = z
@@ -142,6 +142,7 @@ def exit_elevator_func(req):
 
 rospy.init_node('exit_elevator', anonymous=True)
 rospy.Service("/exit_elevator", ser_message, exit_elevator_func)
+node_name = rospy.wait_for_message("/inside_elevator_node_name", String)
 rospy.loginfo("exit elevator service is waiting for request...")
 
 rospy.spin()
