@@ -71,13 +71,7 @@ def exit_elevator_func(req):
     # rospy.sleep(0.5)
     temp_z = z
     # flag = True
-    while (error_max < 1.5):
-
-        success, fail = rosnode.kill_nodes([node_name.data])
-        rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
-        if fail != []:
-            rospy.logerr("The node: \"/inside_elevator\" is still alive")
-        
+    while (error_max < 0.15):
         error = np.absolute(z - temp_z)
         temp_z = z
         error[~np.isfinite(error)] = 0
@@ -90,7 +84,14 @@ def exit_elevator_func(req):
         #     error_max = 0
         #     rospy.sleep(1)
 
-    if (error_max >= 1.5):
+    if (error_max >= 0.15):
+        success, fail = rosnode.kill_nodes([node_name.data])
+        rospy.loginfo("success = "+ str(success)+ "fail = "+ str(fail))
+        if fail != []:
+            rospy.logerr("The node: \"/inside_elevator\" is still alive")
+        elif success != []:
+            rospy.loginfo("The node: \"/inside_elevator\" died")
+
         rospy.loginfo("error_max["+str(num)+"]: "+ str(error_max))
         input_pose = PoseStamped()
         input_pose.header.stamp = rospy.Time.now()
@@ -142,6 +143,7 @@ def exit_elevator_func(req):
 
 rospy.init_node('exit_elevator', anonymous=True)
 rospy.Service("/exit_elevator", ser_message, exit_elevator_func)
+node_name = String()
 node_name = rospy.wait_for_message("/inside_elevator_node_name", String)
 rospy.loginfo("exit elevator service is waiting for request...")
 
