@@ -67,7 +67,8 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    ser_message.srv
-#   Service2.srv
+   switch_map.srv
+   exit_elevator.srv
  )
 
 ## Generate actions in the 'action' folder
