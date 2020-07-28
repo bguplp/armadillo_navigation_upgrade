@@ -24,7 +24,6 @@ def get_scan(msg):
 def wrong_floor_num_func():
     rospy.logerr('Invalid floor number!\nplease insert "0" for first floor and "1" for second floor')
     new_floor_num = input('\nwaiting for your respond choose <"0","1">: ')
-    print new_floor_num," ", type(new_floor_num), " new_floor_num!!!!!!!!!!!!!!!!!!!"
     return int(new_floor_num), False
 
 def first_floor_func():
@@ -35,14 +34,12 @@ def second_floor_func():
 
 def switch_func(floor_num, flag = True):
     global new_map_path
-    print floor_num," ", type(floor_num), " floor_num!!!!!!!!!!!!!!!!!!!"
     switcher = {
         0: first_floor_func,
         1: second_floor_func
     } 
     switch_to = switcher.get(floor_num, wrong_floor_num_func)
     new_floor, flag = switch_to()
-    print flag," ", type(flag), " flag!!!!!!!!!!!!!!!!!!!"
     if not flag:
         switch_func(floor_num = new_floor)
     else:
@@ -124,7 +121,6 @@ def exit_elevator_func(req):
     rospy.wait_for_service('/switch_map')
     switch_srv = rospy.ServiceProxy('/switch_map', switch_map)
     switch_func(floor_num = req.floor_num)
-    print new_map_path, " new_map_path!!!!!!!!!!!!!!" 
     switch_srv(new_map_path)
 
     success, fail = rosnode.kill_nodes([node_name.data])
