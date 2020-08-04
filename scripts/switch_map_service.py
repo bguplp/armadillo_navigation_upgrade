@@ -17,10 +17,12 @@ def switch_map_func(req):
     command_line = "roslaunch armadillo_navigation_upgrade map_server.launch map:="+req.map_name
     args = shlex.split(command_line)
     p = subprocess.Popen(args, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    rospy.loginfo("a new map service node have been launched, with new map!") 
+    rospy.loginfo("new map service node have been launched, with new map!") 
     rospy.sleep(2)
     p.terminate()
+    return True
 
 rospy.init_node("switch_map_service", anonymous=True, disable_signals=True)
 rospy.Service("/switch_map", switch_map, switch_map_func)
+rospy.loginfo("Ready to switch map...")
 rospy.spin()

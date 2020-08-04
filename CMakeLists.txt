@@ -69,6 +69,7 @@ find_package(catkin REQUIRED COMPONENTS
    ser_message.srv
    switch_map.srv
    exit_elevator.srv
+	 elevator_entrance.srv
  )
 
 ## Generate actions in the 'action' folder
