@@ -49,7 +49,7 @@
     <param name="initial_pose_y" value="$(arg y)"/>
     <param name="initial_pose_a" value="$(arg Y)"/>
     
-    <param name="base_frame_id" value="base_footprint"/>
+    <param name=" base_frame_id" value="base_footprint"/>
     <param name="tf_broadcast" value="true"/>
   </node>
 
