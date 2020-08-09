@@ -38,8 +38,5 @@ while not rospy.is_shutdown():
         val_pub.publish(val_msg)
     except rospy.ROSException as e:
         rospy.logwarn("pub inside elevator node failed: %s"%e)
-    
-    rospy.sleep(1)
-
 
 rospy.signal_shutdown("inside elevator node ended")

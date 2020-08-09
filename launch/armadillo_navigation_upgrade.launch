@@ -25,11 +25,11 @@
     </group>-->
     
     <group if="$(arg hector_slam)">
-        <include file="$(find armadillo_navigation_upgrade)/launch/hector_slam.launch" />
+        <include file="$(find armadillo_navigation)/launch/hector_slam.launch" />
     </group>
 
     <group if="$(arg amcl)">
-        <include file="$(find armadillo_navigation_upgrade)/launch/amcl.launch" >
+        <include file="$(find armadillo_navigation)/launch/amcl.launch" >
             <arg name="x" value="$(arg x)"/>
             <arg name="y" value="$(arg y)"/>
             <arg name="Y" value="$(arg Y)"/>
@@ -37,12 +37,12 @@
     </group>    
     
     <group if="$(arg move_base)">
-        <include file="$(find armadillo_navigation_upgrade)/launch/move_base.launch" />
-        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/base_local_planner_params.yaml" command="load" ns="move_base"/>
-        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/global_costmap" />
-        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/local_costmap" />
-        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/local_costmap_params.yaml" command="load" ns="move_base/local_costmap" />
-        <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/global_costmap_params.yaml" command="load" ns="move_base/global_costmap"/>
+        <include file="$(find armadillo_navigation)/launch/move_base.launch" />
+        <rosparam file="$(find armadillo_navigation)/navigation/config/base_local_planner_params.yaml" command="load" ns="move_base"/>
+        <rosparam file="$(find armadillo_navigation)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/global_costmap" />
+        <rosparam file="$(find armadillo_navigation)/navigation/config/costmap_common_params.yaml" command="load" ns="move_base/local_costmap" />
+        <rosparam file="$(find armadillo_navigation)/navigation/config/local_costmap_params.yaml" command="load" ns="move_base/local_costmap" />
+        <rosparam file="$(find armadillo_navigation)/navigation/config/global_costmap_params.yaml" command="load" ns="move_base/global_costmap"/>
     </group>
     
 </launch>

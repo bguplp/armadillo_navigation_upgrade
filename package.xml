@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>armadillo_navigation_upgrade</name>
+  <name>armadillo_navigation</name>
   <version>0.0.0</version>
   <description>The armadillo_navigation_upgrade package</description>
 
@@ -81,6 +81,9 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>tf</exec_depend>
+
+  <build_depend>message_runtime</build_depend>
+<exec_depend>message_generation</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

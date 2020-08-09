@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(armadillo_navigation_upgrade)
+project(armadillo_navigation)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -64,13 +64,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-   ser_message.srv
-   switch_map.srv
-   exit_elevator.srv
-	 elevator_entrance.srv
- )
+add_service_files(
+  FILES
+  ser_message.srv
+#   Service2.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -80,11 +78,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
+generate_messages(
    DEPENDENCIES
 #   move_base_msgs
    std_msgs
- )
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -118,7 +116,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES armadillo_navigation_upgrade
-#  CATKIN_DEPENDS actionlib dynamic_reconfigure message_generation message_runtime move_base_msgs moveit_core moveit_ros_planning moveit_ros_planning_interface roscpp rospy std_msgs tf
+  CATKIN_DEPENDS actionlib dynamic_reconfigure message_generation message_runtime move_base_msgs moveit_core moveit_ros_planning moveit_ros_planning_interface roscpp rospy std_msgs tf
 #  DEPENDS system_lib
 )
 
