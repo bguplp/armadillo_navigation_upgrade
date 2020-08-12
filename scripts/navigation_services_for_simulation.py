@@ -114,7 +114,7 @@ def _callback_navigate_elevator(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(7.650, 3.676, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
+    goal.target_pose.pose.position =  Point(6.062, 3.876, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
     orientation = tf.transformations.quaternion_from_euler(0, 0, 1.650) # (0, 0, 1.687)  (0, 0, 1.39)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
@@ -401,7 +401,7 @@ def _callback_navigate_pour(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(10.374 ,3.634, 0) # Point(7.752 ,3.231, 0)
+    goal.target_pose.pose.position =  Point(10.408 ,3.604, 0) # Point(7.752 ,3.231, 0)
     orientation = tf.transformations.quaternion_from_euler(0, 0, -0.085)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
@@ -433,8 +433,8 @@ def _callback_navigate_place(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(10.051 ,3.285, 0) #Point(7.794 ,3.228, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.732)
+    goal.target_pose.pose.position =  Point(9.995 ,3.6, 0) #Point(7.794 ,3.228, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.71)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
