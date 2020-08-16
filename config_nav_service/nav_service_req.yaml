@@ -1,49 +1,64 @@
 services:
-    nav_service:
+    nav_service:    #####  service name  #####
         x: 0
         y: 0
         yaw: 0
-    elevator_go:    #   Point(7.212 ,4.388, 0) angel (0, 0, 1.687)
-        x: 5.762 
+    elevator_go:    #####  service name  #####    
+        x: 5.762    #   Point(7.212 ,4.388, 0) angel (0, 0, 1.687)
         y: 4.326
         yaw: 1.39
-    table_go:
+    table_go:       #####  service name  #####
         x: 8.12
         y: -1.8
         yaw: -1.694
-    auditorium_go:
+    auditorium_go:  #####  service name  #####
         x: 10.020
         y: -0.656
         yaw: -1.519
-    lab_211_go:
+    lab_211_go:     #####  service name  #####
         x: 0.356
         y: 0.603
         yaw: 0.224
-    corridor_go:
+    corridor_go:       #####  service name  #####
         x: 8.659
         y: 3.203
         yaw: 0.008
-    outside_lab_211_go:
+    outside_lab_211_go: #####  service name  #####
         x: -3.133
         y: 3.741
         yaw: -3.099
-    open_area:
+    open_area:      #####  service name  #####
         x: 5.719
         y: -3.375
         yaw: -1.501
-    corner_area:
+    corner_area:    #####  service name  #####
         x: 1.350
         y: 4.495
         yaw: -1.552
-    person_go:  # 8.050
-        x: 3.750
+    person_go:      #####  service name  #####
+        x: 3.750    # 8.050
         y: 0.322
         yaw: -2.903
-    pour_nav_go:    #   Point(7.794 ,3.228, 0)
-        x: 10.374
+    pour_nav_go:    #####  service name  #####    
+        x: 10.374   #   Point(7.794 ,3.228, 0)
         y: 3.634
         yaw: -0.085
-    place_nav_go:   #   Point(7.794 ,3.228, 0)
-        x: 10.051
+    place_nav_go:   #####  service name  #####
+        x: 10.051   #   Point(7.794 ,3.228, 0)
         y: 3.285
         yaw: -1.732
+
+waypoint_services:
+    nav_through_door:   #####  service name  #####
+                                                                #####################################################
+        waypoint_list: [go_to_the_door, go_through_the_door]    #####  Determine the waypoints execution order  #####
+                                                                #####################################################
+        go_to_the_door:  #####  waypoint  #####
+            x: 5.762
+            y: 4.326
+            yaw: 1.39
+        go_through_the_door:    #####  waypoint  #####
+            x: 8.659
+            y: 3.203
+            yaw: 0.008
+            
