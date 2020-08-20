@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<node name="nav_services" pkg="armadillo_navigation_upgrade" type="navigation_services.py" output="screen">
+	    <rosparam file="$(find armadillo_navigation_upgrade)/config_nav_service/nav_service_req.yaml" command="load"/>
+	</node>
+	
+
+</launch>
