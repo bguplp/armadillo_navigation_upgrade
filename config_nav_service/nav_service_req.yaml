@@ -4,17 +4,17 @@ services:
         y: 0
         yaw: 0
     elevator_go:    #####  service name  #####    
-        x: 5.762    #   Point(7.212 ,4.388, 0) angel (0, 0, 1.687)
-        y: 4.326
-        yaw: 1.39
+        x: 5.8		# 5.762    #   Point(7.212 ,4.388, 0) angel (0, 0, 1.687)
+        y: 4.2		# 4.326
+        yaw: 1.54	# 1.39
     table_go:       #####  service name  #####
         x: 8.12
         y: -1.8
         yaw: -1.694
     auditorium_go:  #####  service name  #####
-        x: 10.020
-        y: -0.656
-        yaw: -1.519
+        x: -13.805	# 10.020
+        y: -4.796	# -0.656
+        yaw: -3.103	# -1.519
     lab_211_go:     #####  service name  #####
         x: 0.356
         y: 0.603
@@ -40,13 +40,17 @@ services:
         y: 0.322
         yaw: -2.903
     pour_nav_go:    #####  service name  #####    
-        x: 10.374   #   Point(7.794 ,3.228, 0)
-        y: 3.634
+        x: 10.408	# 10.374   #   Point(7.794 ,3.228, 0)
+        y: 3.604	# 3.634
         yaw: -0.085
     place_nav_go:   #####  service name  #####
-        x: 10.051   #   Point(7.794 ,3.228, 0)
-        y: 3.285
-        yaw: -1.732
+        x: 9.995	# 10.051   #   Point(7.794 ,3.228, 0)
+        y: 3.6		# 3.285
+        yaw: -1.71	# -1.732
+    room_1_go:   #####  service name  #####
+        x: -13.903
+        y: -4.226
+        yaw: 3.111
 
 waypoint_services:
     enter_lab_211:   #####  service name  #####
