@@ -112,10 +112,10 @@ def init_waypoint_service(service_name, x, y, yaw):
     rospy.Service(str("/"+service_name), ser_message, lambda req: _callback_waypoint_nav(req, x, y, yaw, service_name))
 
 def waypoint_nav():
-    X=[]; Y=[]; Yaw=[]
     services = rospy.get_param("nav_services/waypoint_services")
     services = rospy.get_param("nav_services/waypoint_services").keys() 
     for ii in range (len(services)):
+        X = []; Y = []; Yaw = []
         service_name = services[ii]
         waypoint_list = rospy.get_param("nav_services/waypoint_services/"+service_name+"/waypoint_list")
         for jj in range(len(waypoint_list)):

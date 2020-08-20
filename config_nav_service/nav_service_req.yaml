@@ -49,16 +49,29 @@ services:
         yaw: -1.732
 
 waypoint_services:
-    nav_through_door:   #####  service name  #####
-                                                                #####################################################
-        waypoint_list: [go_to_the_door, go_through_the_door]    #####  Determine the waypoints execution order  #####
-                                                                #####################################################
+    enter_lab_211:   #####  service name  #####
+                                                                ########################################################
+        waypoint_list: [go_to_the_door, go_through_the_door]    #####  Determine the order of waypoints execution  #####
+                                                                ########################################################
+        go_through_the_door:  #####  waypoint  #####
+            x: -7.076
+            y: 1.990
+            yaw: -1.591
+        go_to_the_door:    #####  waypoint  #####
+            x: -6.992
+            y: 3.776
+            yaw: -1.544
+
+    exit_lab_211:   #####  service name  #####
+                                                                ########################################################
+        waypoint_list: [go_to_the_door, go_through_the_door]    #####  Determine the order of waypoints execution  #####
+                                                                ########################################################
         go_to_the_door:  #####  waypoint  #####
-            x: 5.762
-            y: 4.326
-            yaw: 1.39
+            x: -7.076
+            y: 1.990
+            yaw: 1.591
         go_through_the_door:    #####  waypoint  #####
-            x: 8.659
-            y: 3.203
-            yaw: 0.008
+            x: -6.992
+            y: 3.776
+            yaw: 1.544
             
