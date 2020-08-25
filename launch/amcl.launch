@@ -9,8 +9,8 @@
   <node pkg="amcl" type="amcl" name="amcl">
 	<remap from="scan" to="$(arg scan)"/> 
     <param name="save_pose_rate" value="1.0"/>
-    <param name="initial_cov_xx" value="0.1"/>
-    <param name="initial_cov_yy" value="0.1"/>
+    <param name="initial_cov_xx" value="0.12"/> <!--0.1-->
+    <param name="initial_cov_yy" value="0.12"/> <!--0.1-->
     <param name="initial_cov_aa" value="0.1"/>
     <param name="use_map_topic" value="true"/>
     <param name="odom_model_type" value="diff-corrected"/>
@@ -38,8 +38,8 @@
     <param name="laser_lambda_short" value="0.1"/>
     <param name="laser_model_type" value="likelihood_field_prob"/>
     <param name="laser_likelihood_max_dist" value="2.0"/>
-    <param name="update_min_d" value="0.1"/>   <!--value="0.2"-->
-    <param name="update_min_a" value="0.2"/>   <!--value="0.5"-->
+    <param name="update_min_d" value="0.05"/>   <!--value="0.2"--> <!--value="0.1"-->
+    <param name="update_min_a" value="0.1"/>   <!--value="0.5"--><!--value="0.2"-->
     <param name="odom_frame_id" value="odom"/>
     <param name="resample_interval" value="2"/>
     <param name="transform_tolerance" value="0.05"/>
