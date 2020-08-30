@@ -25,7 +25,7 @@ copy armadillo1_navigetion_upgrade.launch to ~/catkin_ws/src/armadillo/armadillo
 cp armadillo_navigation_upgrade/launch/armadillo1_navigetion_upgrade.launch armadillo/armadillo1/launch
 ```
 
-Now you can use armadillo<number-(1 or 2)>_navigetion_upgrade.launch exactly as you used the regular armadillo<number-(1 or 2)>.launch, but you will use navigation configuration from this package
+Now you can use armadillo<number-(1 or 2)>_navigetion_upgrade.launch exactly as you used the regular armadillo<number-(1 or 2)>.launch, with the navigation configuration from this package
 
 ## running examples
 
