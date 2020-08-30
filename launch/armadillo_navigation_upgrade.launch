@@ -5,9 +5,10 @@
 <launch>
     
     <!--common settings-->
-    <!--<arg name="gmapping" default="false"/>-->
+    <arg name="gmapping" default="false"/>
     <arg name="hector_slam" default="false"/>
     <arg name="amcl" default="false"/>
+	<arg name="robot_localization" default="false"/>
     <arg name="have_map" default="false" doc="set to true to use pre-saved map"/>
     <arg name="map" default="map.yaml" doc="pre-saved map path"/>
     <arg name="move_base" default="false"/>
@@ -15,14 +16,21 @@
     <arg name="y" default="0.0"/>
     <arg name="z" default="0.0"/>
     <arg name="Y" default="0.0" />
+	<arg name="armadillo1" default="false"/>
+	<arg name="armadillo2" default="true"/>
     
     <group if="$(arg have_map)">
         <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" />
     </group>    
    
-    <!--<group if="$(arg gmapping)">
-        <include file="$(find armadillo2_navigation)/launch/gmapping.launch" />
-    </group>-->
+    <group if="$(arg gmapping)">
+		<group if="$(arg armadillo2)">
+        	<include file="$(find armadillo2_navigation)/launch/gmapping.launch" />
+		</group>
+		<group if="$(arg armadillo1)">
+        	<include file="$(find armadillo1_navigation)/launch/gmapping.launch" />
+		</group>
+    </group>
     
     <group if="$(arg hector_slam)">
         <include file="$(find armadillo_navigation_upgrade)/launch/hector_slam.launch" />
@@ -36,6 +44,25 @@
 	</include>
     </group>    
     
+    <group unless="$(arg gmapping)">
+        <group unless="$(arg hector_slam)">
+            <group unless="$(arg amcl)">
+          	  <group unless="$(arg robot_localization)">
+                     <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 20" />
+			  </group>
+            </group>
+        </group>
+    </group>
+
+	<group if="$(arg robot_localization)">
+		<group if="$(arg armadillo2)">
+			<include file="$(find armadillo2_navigation)/launch/robot_localization.launch" />
+		</group>
+		<group if="$(arg armadillo1)">
+			<include file="$(find armadillo1_navigation)/launch/robot_localization.launch" />
+		</group>
+    </group>
+
     <group if="$(arg move_base)">
         <include file="$(find armadillo_navigation_upgrade)/launch/move_base.launch" />
         <rosparam file="$(find armadillo_navigation_upgrade)/navigation/config/base_local_planner_params.yaml" command="load" ns="move_base"/>
