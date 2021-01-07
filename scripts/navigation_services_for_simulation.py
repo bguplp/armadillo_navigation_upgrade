@@ -12,15 +12,21 @@ from std_msgs.msg import String
 import os, time, signal, threading
 import subprocess
 from subprocess import Popen, PIPE, call
+# import moveit_commander
 
 rospy.init_node('navigation_services')
 
+# def check_moveit_pose():
+#     robot = moveit_commander.RobotCommander()
+#     print("current arm state: ", robot.get_current_state())
+
 def planning_cobra_center():
     #End#################################################################################################
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # check_moveit_pose()
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     rospy.logerr('Planning to cobra-center!\n')
     time.sleep(1)
-    proc = subprocess.Popen(["roslaunch /home/armadillo/catkin_ws/src/robotican_demos_upgrade/launch/cobra_center.launch"], stdout=PIPE, stderr=PIPE, shell=True, universal_newlines=True)  
+    proc = subprocess.Popen(["roslaunch " + BASE_DIR + "/robotican_demos_upgrade/launch/cobra_center.launch"], stdout=PIPE, stderr=PIPE, shell=True, universal_newlines=True)  
     while True:
         lin = proc.stdout.readline()
         if "success" in lin and "True" in lin:            
@@ -46,8 +52,8 @@ def _callback_navigate_corner_area(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(1.350, 4.495, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.552)
+    goal.target_pose.pose.position =  Point(2.935, 4.244, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.554)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -90,8 +96,8 @@ def _callback_navigate_open_area(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(5.719, -3.375, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.501)
+    goal.target_pose.pose.position =  Point(5.983, -2.680, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.532)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -239,7 +245,23 @@ def _callback_navigate_room_peson(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
-    time.sleep(4)
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
+    if(ac.get_state() ==  GoalStatus.SUCCEEDED):
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
+    else:
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 
 def _callback_navigate_room_place(req):
@@ -267,7 +289,23 @@ def _callback_navigate_room_place(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
-    time.sleep(4)
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
+    if(ac.get_state() ==  GoalStatus.SUCCEEDED):
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
+    else:
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     
 
     feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
@@ -302,8 +340,8 @@ def _callback_navigate_auditorium(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-13.805, -4.796, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.103)
+    goal.target_pose.pose.position =  Point(10.485, -1.6, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.595)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -347,8 +385,8 @@ def _callback_navigate_lab_211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(0.356, 0.603, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, 0.224)
+    goal.target_pose.pose.position =  Point(1.816, 0.158, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 0.155)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -390,8 +428,8 @@ def _callback_navigate_outside_lab211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-3.133, 3.741, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.099)
+    goal.target_pose.pose.position =  Point(-4.284, 2.952, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.0)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -415,8 +453,8 @@ def _callback_navigate_outside_lab211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-4.352, 4.006, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -2.884)
+    goal.target_pose.pose.position =  Point(-4.84, 2.952, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.0)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -458,8 +496,8 @@ def _callback_navigate_corridor(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(8.659, 3.203, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, 0.008)
+    goal.target_pose.pose.position =  Point(8.506, 3.696, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -0.037)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
