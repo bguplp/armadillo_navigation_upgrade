@@ -8,7 +8,7 @@ from actionlib_msgs.msg import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import Point
 from armadillo_navigation_upgrade.srv import ser_message, ser_messageResponse
-
+from std_msgs.msg import String
 import os, time, signal, threading
 import subprocess
 from subprocess import Popen, PIPE, call
@@ -17,9 +17,10 @@ rospy.init_node('navigation_services')
 
 def planning_cobra_center():
     #End#################################################################################################
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     rospy.logerr('Planning to cobra-center!\n')
     time.sleep(1)
-    proc = subprocess.Popen(["roslaunch robotican_demos_upgrade cobra_center.launch"], stdout=PIPE, stderr=PIPE, shell=True, universal_newlines=True)  
+    proc = subprocess.Popen(["roslaunch /home/armadillo/catkin_ws/src/robotican_demos_upgrade/launch/cobra_center.launch"], stdout=PIPE, stderr=PIPE, shell=True, universal_newlines=True)  
     while True:
         lin = proc.stdout.readline()
         if "success" in lin and "True" in lin:            
@@ -56,14 +57,24 @@ def _callback_navigate_corner_area(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
     
+
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
         rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
         rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_open_area(req):
 
@@ -90,14 +101,23 @@ def _callback_navigate_open_area(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
     
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
         rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
         rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 
 def _callback_navigate_elevator(req):
@@ -128,14 +148,23 @@ def _callback_navigate_elevator(req):
     time.sleep(4)
     
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the elevator")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the elevator")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 
 def _callback_navigate_room_1(req):
@@ -166,14 +195,23 @@ def _callback_navigate_room_1(req):
     time.sleep(4)
     
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the elevator")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the elevator")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 
 def _callback_navigate_room_peson(req):
@@ -232,14 +270,23 @@ def _callback_navigate_room_place(req):
     time.sleep(4)
     
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the elevator")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the elevator")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_auditorium(req):
 
@@ -266,14 +313,23 @@ def _callback_navigate_auditorium(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.logerr("You have reached the auditorium")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the auditorium")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_lab_211(req):
 
@@ -302,14 +358,23 @@ def _callback_navigate_lab_211(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        print("You have reached the lab211")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        print("The robot failed to reach the lab211")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_outside_lab211(req):
     
@@ -361,14 +426,23 @@ def _callback_navigate_outside_lab211(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        print("You have reached the outside of lab211")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        print("The robot failed to reach the outside of lab211")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_corridor(req):
 
@@ -395,14 +469,23 @@ def _callback_navigate_corridor(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        print("You have reached the corridor")
+        rospy.logerr("You have reached the open area")
         ser_messageResponse(True)
-        time.sleep(1)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        print("The robot failed to reach the corridor")
+        rospy.logerr("The robot failed to reach the open area")
         ser_messageResponse(False)
-        time.sleep(1)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_table(req):
 
@@ -429,12 +512,23 @@ def _callback_navigate_table(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the table")
-        # ser_messageResponse(True)
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the table")
-        # ser_messageResponse(False)
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 
 def _callback_navigate_person(req):
@@ -462,12 +556,23 @@ def _callback_navigate_person(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the person")
-        # ser_messageResponse(True)
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the person")
-        # ser_messageResponse(False)
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_pour(req):
 
@@ -494,12 +599,23 @@ def _callback_navigate_pour(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the person")
-        # ser_messageResponse(True)
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the person")
-        # ser_messageResponse(False)
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 def _callback_navigate_place(req):
 
@@ -526,12 +642,23 @@ def _callback_navigate_place(req):
     ac.send_goal(goal)	
     ac.wait_for_result(rospy.Duration(60))
 
+    feedback_pub = rospy.Publisher("feedback_for_nav",String,  queue_size=1)
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
-        rospy.loginfo("You have reached the person")
-        # ser_messageResponse(True)
+        rospy.logerr("You have reached the open area")
+        ser_messageResponse(True)
+        msg = String()
+        msg.data = "success"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
     else:
-        rospy.logerr("The robot failed to reach the person")
-        # ser_messageResponse(False)
+        rospy.logerr("The robot failed to reach the open area")
+        ser_messageResponse(False)
+        msg = String()
+        msg.data = "failure"
+        for ii in range(3):
+            feedback_pub.publish(msg)
+            time.sleep(1)
 
 #it must be in cobra-center position before starting navigation
 planning_cobra_center()
