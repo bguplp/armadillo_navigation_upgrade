@@ -12,17 +12,17 @@ from std_msgs.msg import String
 import os, time, signal, threading
 import subprocess
 from subprocess import Popen, PIPE, call
-# import moveit_commander
+import moveit_commander
 
 rospy.init_node('navigation_services')
 
-# def check_moveit_pose():
-#     robot = moveit_commander.RobotCommander()
-#     print("current arm state: ", robot.get_current_state())
+def check_moveit_pose():
+    robot = moveit_commander.RobotCommander()
+    print("current arm state: ", robot.get_current_state())
 
 def planning_cobra_center():
     #End#################################################################################################
-    # check_moveit_pose()
+    check_moveit_pose()
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     rospy.logerr('Planning to cobra-center!\n')
     time.sleep(1)
@@ -52,8 +52,8 @@ def _callback_navigate_corner_area(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(2.935, 4.244, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.554)
+    goal.target_pose.pose.position =  Point(1.744, 4.711, 0)     # (2.935, 4.244, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.69)      # (0, 0, -1.554)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -70,7 +70,7 @@ def _callback_navigate_corner_area(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -78,7 +78,7 @@ def _callback_navigate_corner_area(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -96,8 +96,8 @@ def _callback_navigate_open_area(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(5.983, -2.680, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.532)
+    goal.target_pose.pose.position =  Point(3.553, -3.046, 0)   # (5.983, -2.680, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.680)    # (0, 0, -1.532)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -113,7 +113,7 @@ def _callback_navigate_open_area(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -121,7 +121,7 @@ def _callback_navigate_open_area(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -140,8 +140,8 @@ def _callback_navigate_elevator(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(5.8, 4.2, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, 1.54) # (0, 0, 1.687)  (0, 0, 1.39)
+    goal.target_pose.pose.position =  Point(6.020, 4.257, 0)     # (5.8, 4.2, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 1.452 )      # (0, 0, 1.54)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -160,7 +160,7 @@ def _callback_navigate_elevator(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -168,7 +168,7 @@ def _callback_navigate_elevator(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -187,8 +187,8 @@ def _callback_navigate_room_1(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-13.759, -3.9, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, 3.111) # (0, 0, 1.687)  (0, 0, 1.39)
+    goal.target_pose.pose.position =  Point(7.212, 4.388, 0)    # (-13.759, -3.9, 0) (5.762 ,4.326, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 0)     # (0, 0, 3.111) (0, 0, 1.39)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -207,7 +207,7 @@ def _callback_navigate_room_1(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -215,7 +215,7 @@ def _callback_navigate_room_1(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -234,8 +234,8 @@ def _callback_navigate_room_peson(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-6.527, -6.922, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.361) # (0, 0, 1.687)  (0, 0, 1.39)
+    goal.target_pose.pose.position =  Point(7.212, 4.388, 0)    # (-6.527, -6.922, 0)  (5.762 ,4.326, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 0)      # (0, 0, -1.361) (0, 0, 1.39)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -251,7 +251,7 @@ def _callback_navigate_room_peson(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -259,7 +259,7 @@ def _callback_navigate_room_peson(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -278,8 +278,8 @@ def _callback_navigate_room_place(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-13.34, -3.733, 0) # (7.212 ,4.388, 0)  (5.762 ,4.326, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.552) # (0, 0, 1.687)  (0, 0, 1.39)
+    goal.target_pose.pose.position =  Point(7.212, 4.388, 0)        # (-13.34, -3.733, 0) (5.762 ,4.326, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 0)     # (0, 0, -1.552) (0, 0, 1.39)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -295,7 +295,7 @@ def _callback_navigate_room_place(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -303,7 +303,7 @@ def _callback_navigate_room_place(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     
@@ -314,7 +314,7 @@ def _callback_navigate_room_place(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -322,7 +322,7 @@ def _callback_navigate_room_place(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -340,8 +340,8 @@ def _callback_navigate_auditorium(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(10.485, -1.6, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.595)
+    goal.target_pose.pose.position =  Point(9.102, -1.511, 0)     # (10.485, -1.6, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -1.696)      # (0, 0, -1.595)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -357,7 +357,7 @@ def _callback_navigate_auditorium(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -365,7 +365,7 @@ def _callback_navigate_auditorium(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -385,8 +385,8 @@ def _callback_navigate_lab_211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(1.816, 0.158, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, 0.155)
+    goal.target_pose.pose.position =  Point(-0.449, 1.429, 0)     # (1.816, 0.158, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, -0.076)      # (0, 0, 0.155)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -402,7 +402,7 @@ def _callback_navigate_lab_211(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -410,7 +410,7 @@ def _callback_navigate_lab_211(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -428,8 +428,8 @@ def _callback_navigate_outside_lab211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-4.284, 2.952, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.0)
+    goal.target_pose.pose.position =  Point(-5.904, 4.274, 0)     # (-4.284, 2.952, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 3.093)      # (0, 0, -3.0)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -453,8 +453,8 @@ def _callback_navigate_outside_lab211(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(-4.84, 2.952, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -3.0)
+    goal.target_pose.pose.position =  Point(-6.609, 4.020, 0)     # (-4.84, 2.952, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 3.093)      # (0, 0, -3.0)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -470,7 +470,7 @@ def _callback_navigate_outside_lab211(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -478,7 +478,7 @@ def _callback_navigate_outside_lab211(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -496,8 +496,8 @@ def _callback_navigate_corridor(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(8.506, 3.696, 0)
-    orientation = tf.transformations.quaternion_from_euler(0, 0, -0.037)
+    goal.target_pose.pose.position =  Point(8.140, 3.194, 0)     # (8.506, 3.696, 0)
+    orientation = tf.transformations.quaternion_from_euler(0, 0, 0)      # (0, 0, -0.037)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
     goal.target_pose.pose.orientation.z = orientation[2]
@@ -513,7 +513,7 @@ def _callback_navigate_corridor(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -521,7 +521,7 @@ def _callback_navigate_corridor(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -539,7 +539,7 @@ def _callback_navigate_table(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(8.12 ,-1.8, 0) #8.1 -1.760 
+    goal.target_pose.pose.position =  Point(8.12, -1.8, 0)      # 8.1 -1.760 
     orientation = tf.transformations.quaternion_from_euler(0, 0, -1.694)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
@@ -556,7 +556,7 @@ def _callback_navigate_table(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -564,7 +564,7 @@ def _callback_navigate_table(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -583,7 +583,7 @@ def _callback_navigate_person(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(3.750 ,0.322, 0) #8.050
+    goal.target_pose.pose.position =  Point(3.750, 0.322, 0) #8.050
     orientation = tf.transformations.quaternion_from_euler(0, 0, -2.903)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
@@ -600,7 +600,7 @@ def _callback_navigate_person(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -608,7 +608,7 @@ def _callback_navigate_person(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -643,7 +643,7 @@ def _callback_navigate_pour(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -651,7 +651,7 @@ def _callback_navigate_pour(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
@@ -669,7 +669,7 @@ def _callback_navigate_place(req):
     goal.target_pose.header.frame_id = "/map"
     goal.target_pose.header.stamp = rospy.Time.now()
     # moving towards the goal*/
-    goal.target_pose.pose.position =  Point(9.995 ,3.6, 0) #Point(7.794 ,3.228, 0)
+    goal.target_pose.pose.position =  Point(9.995, 3.6, 0) #Point(7.794 ,3.228, 0)
     orientation = tf.transformations.quaternion_from_euler(0, 0, -1.71)
     goal.target_pose.pose.orientation.x = orientation[0]
     goal.target_pose.pose.orientation.y = orientation[1]
@@ -686,7 +686,7 @@ def _callback_navigate_place(req):
         ser_messageResponse(True)
         msg = String()
         msg.data = "success"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
     else:
@@ -694,7 +694,7 @@ def _callback_navigate_place(req):
         ser_messageResponse(False)
         msg = String()
         msg.data = "failure"
-        for ii in range(3):
+        for ii in range(7):
             feedback_pub.publish(msg)
             time.sleep(1)
 
