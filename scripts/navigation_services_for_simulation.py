@@ -26,6 +26,7 @@ def planning_cobra_center():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     rospy.logerr('Planning to cobra-center!\n')
     time.sleep(1)
+    print(BASE_DIR)
     proc = subprocess.Popen(["roslaunch " + BASE_DIR + "/robotican_demos_upgrade/launch/cobra_center.launch"], stdout=PIPE, stderr=PIPE, shell=True, universal_newlines=True)  
     while True:
         lin = proc.stdout.readline()
