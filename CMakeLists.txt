@@ -67,6 +67,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    ser_message.srv
+   move_to_point.srv
 #   Service1.srv
 #   Service2.srv
  )
