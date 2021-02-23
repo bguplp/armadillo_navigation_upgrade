@@ -6,6 +6,7 @@ import actionlib
 from actionlib_msgs.msg import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import Point
+from std_msgs.msg import String
 from armadillo_navigation_upgrade.srv import move_to_point, move_to_pointResponse
 
 
@@ -55,10 +56,10 @@ def _callback_nav_service(req, x, y, yaw):
 
     if(ac.get_state() ==  GoalStatus.SUCCEEDED):
         rospy.loginfo("You have reached goal")
-        move_to_pointResponse("true")
+        move_to_pointResponse(String("true"))
     else:
         rospy.logerr("The robot failed to reach goal")
-        move_to_pointResponse("false")
+        move_to_pointResponse(String("false"))
 
 def init_nav_service(service_name, x, y, yaw):
     # method_name = "_callback_"+service_name 
@@ -104,10 +105,10 @@ def _callback_waypoint_nav(req, x, y, yaw, service_name):
 
         if(ac.get_state() ==  GoalStatus.SUCCEEDED):
             rospy.loginfo("Reached waypoint "+waypoint[ii])
-            move_to_pointResponse("true")
+            move_to_pointResponse(String("true"))
         else:
             rospy.logwarn("Failed reaching waypoint "+waypoint[ii])
-            move_to_pointResponse("false")
+            move_to_pointResponse(String("false"))
 
 def init_waypoint_service(service_name, x, y, yaw):
     rospy.Service(str("/"+service_name), move_to_point, lambda req: _callback_waypoint_nav(req, x, y, yaw, service_name))
@@ -131,11 +132,13 @@ def waypoint_nav():
 if __name__ == "__main__":
     rospy.init_node('navigation_service_node')
     #   it must be in cobra-center position before starting navigation
-    planning_cobra_center()
+    # planning_cobra_center()
     waypoint_nav()
     service_nav()
 
     rospy.loginfo("navigation service node is waiting for request...")
+    while not rospy.is_shutdown():
+        rospy.sleep(1)
     rospy.spin()
 
 #Command order senario 1:
