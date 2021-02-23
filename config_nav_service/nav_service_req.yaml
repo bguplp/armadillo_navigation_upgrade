@@ -1,4 +1,4 @@
-services:
+/nav_services:
     nav_service:    #####  service name  #####
         x: 0
         y: 0
@@ -52,7 +52,7 @@ services:
         y: -4.226
         yaw: 3.111
 
-waypoint_services:
+/nav_waypoint_services:
     enter_lab_211:   #####  service name  #####
                                                                                ########################################################
         waypoint_list: [go_to_lab_211, go_to_the_door, go_through_the_door]    #####  Determine the order of waypoints execution  #####

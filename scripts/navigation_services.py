@@ -68,15 +68,15 @@ def init_nav_service(service_name, x, y, yaw):
     rospy.Service(str("/"+service_name), ser_message, lambda req: _callback_nav_service(req, x, y, yaw))
 
 def service_nav():
-    services = rospy.get_param("nav_services/services").keys() 
+    services = rospy.get_param("/nav_services").keys() 
     for ii in range (len(services)):
         service_name = services[ii]
-        nav_goal = rospy.get_param("nav_services/services/"+service_name)
+        nav_goal = rospy.get_param("/nav_services/"+service_name)
         x, y, yaw = nav_goal['x'], nav_goal['y'], nav_goal['yaw']
         init_nav_service(service_name, x, y, yaw)
 
 def _callback_waypoint_nav(req, x, y, yaw, service_name):
-    waypoint = rospy.get_param("nav_services/waypoint_services/"+service_name+"/waypoint_list")
+    waypoint = rospy.get_param("/nav_waypoint_services/"+service_name+"/waypoint_list")
     for ii in range (len(waypoint)):
         # define a client to send goal requests to the move_base server through a SimpleActionClient
         ac = actionlib.SimpleActionClient("move_base", MoveBaseAction)
@@ -112,15 +112,15 @@ def init_waypoint_service(service_name, x, y, yaw):
     rospy.Service(str("/"+service_name), ser_message, lambda req: _callback_waypoint_nav(req, x, y, yaw, service_name))
 
 def waypoint_nav():
-    services = rospy.get_param("nav_services/waypoint_services")
-    services = rospy.get_param("nav_services/waypoint_services").keys() 
+    services = rospy.get_param("/nav_waypoint_services")
+    services = rospy.get_param("/nav_waypoint_services").keys() 
     for ii in range (len(services)):
         X = []; Y = []; Yaw = []
         service_name = services[ii]
-        waypoint_list = rospy.get_param("nav_services/waypoint_services/"+service_name+"/waypoint_list")
+        waypoint_list = rospy.get_param("/nav_waypoint_services/"+service_name+"/waypoint_list")
         for jj in range(len(waypoint_list)):
             waypoint_name = waypoint_list[jj]
-            waypoint_goal = rospy.get_param("nav_services/waypoint_services/"+service_name+"/"+waypoint_name)
+            waypoint_goal = rospy.get_param("/nav_waypoint_services/"+service_name+"/"+waypoint_name)
             x, y, yaw = waypoint_goal['x'], waypoint_goal['y'], waypoint_goal['yaw']
             X.append(x)
             Y.append(y)
