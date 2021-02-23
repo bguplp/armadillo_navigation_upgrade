@@ -36,7 +36,7 @@ def planning_cobra_center():
             break
         else:
             continue    
-    proc.terminate()
+    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
     return
 
 def _callback_navigate_corner_area(req):
