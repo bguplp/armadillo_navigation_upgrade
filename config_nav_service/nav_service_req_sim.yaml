@@ -1,0 +1,44 @@
+services:
+    nav_service:    #####  service name  #####
+        x: 0
+        y: 0
+        yaw: 0
+    elevator_go:    #####  service name  #####    
+        x: 5.8      # 5.762    #   Point(7.212 ,4.388, 0) angel (0, 0, 1.687)
+        y: 4.2      # 4.326
+        yaw: 1.54   # 1.39
+    auditorium_go:  #####  service name  #####
+        x: 9.102  #  -13.805      # 10.020
+        y: -1.511  #  -4.796       # -0.656
+        yaw: -1.696  #  -3.103     # -1.519
+    lab_211_go:     #####  service name  #####
+        x: 0.356
+        y: 0.603
+        yaw: 0.224
+    corridor_go:       #####  service name  #####
+        x: 8.659
+        y: 3.203
+        yaw: 0.008
+    open_area:      #####  service name  #####
+        x: 3.719
+        y: -3.375
+        yaw: -1.501
+    corner_area:    #####  service name  #####
+        x: 1.350
+        y: 4.495
+        yaw: -1.552
+
+waypoint_services:
+	outside_lab_211_go:   #####  service name  #####
+	                                                                           ########################################################
+	    waypoint_list: [go_to_lab_211, go_to_the_door, go_through_the_door]    #####  Determine the order of waypoints execution  #####
+	                                                                           ########################################################
+	    first_point:  #####  waypoint  #####
+	        x: -5.904
+	        y: 4.274
+	        yaw: 3.093
+	    seconde_point:    #####  waypoint  #####
+	        x: -6.609
+	        y: 4.274
+	        yaw: 3.093
+
