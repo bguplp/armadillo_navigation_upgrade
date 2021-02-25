@@ -8,6 +8,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import Point
 from armadillo_navigation_upgrade.srv import move_to_point, move_to_pointResponse
 from std_srvs.srv import Trigger
+from std_msgs.msg import Float64
 
 
 def planning_cobra_center(pose="cobra_center_pose"):
@@ -20,7 +21,19 @@ def planning_cobra_center(pose="cobra_center_pose"):
         print "Service call failed: %s" % e
 
 
+def set_toroso(hight=0.05):
+    pub_torso_cmd = rospy.Publisher("/torso_effort_controller/command", Float64, queue_size=1)
+    pub_torso_cmd.publish(Float64(hight))
+    for ii in range(3):
+        pub_torso_cmd.publish(Float64(hight))
+        rospy.sleep(0.1)
+    rospy.sleep(1)
+
+
 def _callback_nav_service(req, x, y, yaw):
+    #   it must be in cobra-center position before starting navigation
+    planning_cobra_center()
+    set_toroso()
     # define a client to send goal requests to the move_base server through a SimpleActionClient
     ac = actionlib.SimpleActionClient("move_base", MoveBaseAction)
     # wait for the action server to come up
@@ -71,6 +84,9 @@ def service_nav():
 
 
 def _callback_waypoint_nav(req, x, y, yaw, service_name):
+    #   it must be in cobra-center position before starting navigation
+    planning_cobra_center()
+    set_toroso()
     waypoint = rospy.get_param("/nav_waypoint_services/" + service_name + "/waypoint_list")
     for ii in range(len(waypoint)):
         # define a client to send goal requests to the move_base server through a SimpleActionClient
@@ -116,7 +132,7 @@ def waypoint_nav():
         Y = []
         Yaw = []
         service_name = services[ii]
-        waypoint_list = rospy.get_param("/nav_waypoint_services/"+service_name+"/waypoint_list")
+        waypoint_list = rospy.get_param("/nav_waypoint_services/" + service_name + "/waypoint_list")
         for jj in range(len(waypoint_list)):
             waypoint_name = waypoint_list[jj]
             waypoint_goal = rospy.get_param("/nav_waypoint_services/" + service_name + "/" + waypoint_name)
@@ -129,8 +145,6 @@ def waypoint_nav():
 
 if __name__ == "__main__":
     rospy.init_node('navigation_service_node')
-    #   it must be in cobra-center position before starting navigation
-    planning_cobra_center()
     waypoint_nav()
     service_nav()
 
