@@ -700,7 +700,7 @@ def _callback_navigate_place(req):
             time.sleep(1)
 
 #it must be in cobra-center position before starting navigation
-planning_cobra_center()
+# planning_cobra_center()
 
 rospy.Service("/elevator_go", ser_message, _callback_navigate_elevator)
 rospy.loginfo('"/elevator_go" is waiting for request...')
