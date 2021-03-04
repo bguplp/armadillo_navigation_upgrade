@@ -21,7 +21,7 @@ def planning_cobra_center(pose="cobra_center_pose"):
         print "Service call failed: %s" % e
 
 
-def set_toroso(hight=0.05):
+def set_toroso(hight=0.01):
     pub_torso_cmd = rospy.Publisher("/torso_effort_controller/command", Float64, queue_size=1)
     pub_torso_cmd.publish(Float64(hight))
     for ii in range(3):
