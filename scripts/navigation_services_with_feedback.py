@@ -11,7 +11,7 @@ from std_srvs.srv import Trigger
 from std_msgs.msg import Float64
 
 
-def planning_cobra_center(pose="cobra_center_pose"):
+def planning_cobra_center(pose="arm_pose_srv"):
     try:
         rospy.wait_for_service(pose)
         cobra_center_proxy = rospy.ServiceProxy(pose, Trigger)
