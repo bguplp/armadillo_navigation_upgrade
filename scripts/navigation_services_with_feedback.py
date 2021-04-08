@@ -55,7 +55,7 @@ def _callback_nav_service(req, x, y, yaw):
 
     rospy.loginfo("Sending goal location ...")
     ac.send_goal(goal)
-    ac.wait_for_result(rospy.Duration(60))
+    ac.wait_for_result(rospy.Duration(600))
 
     if(ac.get_state() == GoalStatus.SUCCEEDED):
         rospy.loginfo("You have reached goal")
@@ -86,6 +86,7 @@ def service_nav():
 def _callback_waypoint_nav(req, x, y, yaw, service_name):
     #   it must be in cobra-center position before starting navigation
     planning_cobra_center()
+    flag = False
     set_toroso()
     waypoint = rospy.get_param("/nav_waypoint_services/" + service_name + "/waypoint_list")
     for ii in range(len(waypoint)):
@@ -110,14 +111,20 @@ def _callback_waypoint_nav(req, x, y, yaw, service_name):
 
         rospy.loginfo("Sending goal location ...")
         ac.send_goal(goal)
-        ac.wait_for_result(rospy.Duration(60))
+        ac.wait_for_result(rospy.Duration(600))
 
         if(ac.get_state() == GoalStatus.SUCCEEDED):
             rospy.loginfo("Reached waypoint "+waypoint[ii])
-            return move_to_pointResponse("true")
+            flag = True
         else:
             rospy.logwarn("Failed reaching waypoint "+waypoint[ii])
-            return move_to_pointResponse("false")
+            flag = False
+    if flag:
+        rospy.loginfo("You have reached goal")
+        return move_to_pointResponse("true")
+    else:
+        rospy.logerr("The robot failed to reach goal")
+        return move_to_pointResponse("false")
 
 
 def init_waypoint_service(service_name, x, y, yaw):

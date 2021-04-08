@@ -27,6 +27,10 @@
         x: 1.350
         y: 4.495
         yaw: -1.552
+    near_elevator1:    #####  service name  #####
+        x: 5.350
+        y: 3.203
+        yaw: -1.552
 
 /nav_waypoint_services:
     outside_lab211:   #####  service name  #####
