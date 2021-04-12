@@ -7,7 +7,7 @@ from actionlib_msgs.msg import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import Point
 from armadillo_navigation_upgrade.srv import ser_message, ser_messageResponse
-
+from std_msgs.msg import Float64
 import os, time, signal, threading
 import subprocess
 from subprocess import Popen, PIPE, call
@@ -59,7 +59,19 @@ def _callback_nav_service(req, x, y, yaw):
         rospy.logerr("The robot failed to reach goal")
         ser_messageResponse(False)
 
+    torso_pub = rospy.Publisher("/torso_effort_controller/command",Float64,queue_size=2)
+    torso_msg = Float64()
+    torso_msg.data = 0.22
+    for ii in range(4):
+        torso_pub.publish(torso_msg)
+
 def init_nav_service(service_name, x, y, yaw):
+    torso_pub = rospy.Publisher("/torso_effort_controller/command",Float64,queue_size=2)
+    torso_msg = Float64()
+    torso_msg.data = 0.01
+    for ii in range(4):
+        torso_pub.publish(torso_msg)
+
     # method_name = "_callback_"+service_name 
     # possibles = globals().copy()
     # possibles.update(locals())
@@ -71,6 +83,7 @@ def service_nav():
     services = rospy.get_param("nav_services/services").keys() 
     for ii in range (len(services)):
         service_name = services[ii]
+        print "nav_services/services/"+service_name, rospy.get_param("nav_services/services/"+service_name)
         nav_goal = rospy.get_param("nav_services/services/"+service_name)
         x, y, yaw = nav_goal['x'], nav_goal['y'], nav_goal['yaw']
         init_nav_service(service_name, x, y, yaw)
@@ -109,6 +122,11 @@ def _callback_waypoint_nav(req, x, y, yaw, service_name):
             ser_messageResponse(False)
 
 def init_waypoint_service(service_name, x, y, yaw):
+    torso_pub = rospy.Publisher("/torso_effort_controller/command",Float64,queue_size=2)
+    torso_msg = Float64()
+    torso_msg.data = 0.01
+    for ii in range(4):
+        torso_pub.publish(torso_msg)
     rospy.Service(str("/"+service_name), ser_message, lambda req: _callback_waypoint_nav(req, x, y, yaw, service_name))
 
 def waypoint_nav():
@@ -120,6 +138,7 @@ def waypoint_nav():
         waypoint_list = rospy.get_param("nav_services/waypoint_services/"+service_name+"/waypoint_list")
         for jj in range(len(waypoint_list)):
             waypoint_name = waypoint_list[jj]
+            print "nav_services/waypoint_services/"+service_name+"/"+waypoint_name, rospy.get_param("nav_services/waypoint_services/"+service_name+"/"+waypoint_name)
             waypoint_goal = rospy.get_param("nav_services/waypoint_services/"+service_name+"/"+waypoint_name)
             x, y, yaw = waypoint_goal['x'], waypoint_goal['y'], waypoint_goal['yaw']
             X.append(x)
