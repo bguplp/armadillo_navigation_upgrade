@@ -14,13 +14,11 @@ from robotican_demos_upgrade.srv import armTargetPose
 def planning_cobra_center(pose="cobra_center"):
     try:
         rospy.wait_for_service("arm_pose_srv")
-        target = armTargetPose()
-        target.pose_name = pose
-        cobra_center_proxy = rospy.ServiceProxy(target, armTargetPose)
-        resp = cobra_center_proxy()
+        cobra_center_proxy = rospy.ServiceProxy("arm_pose_srv", armTargetPose)
+        resp = cobra_center_proxy(pose)
         return resp.success
     except rospy.ServiceException, e:
-        print "Service call failed: %s"%e
+        print "Service call failed: %s" % e
 
 
 def set_toroso(hight=0.01):
