@@ -7,18 +7,20 @@ from actionlib_msgs.msg import GoalStatus
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import Point
 from armadillo_navigation_upgrade.srv import move_to_point, move_to_pointResponse
-from std_srvs.srv import Trigger
 from std_msgs.msg import Float64
+from robotican_demos_upgrade.srv import armTargetPose
 
 
-def planning_cobra_center(pose="arm_pose_srv"):
+def planning_cobra_center(pose="cobra_center"):
     try:
-        rospy.wait_for_service(pose)
-        cobra_center_proxy = rospy.ServiceProxy(pose, Trigger)
+        rospy.wait_for_service("arm_pose_srv")
+        target = armTargetPose()
+        target.pose_name = pose
+        cobra_center_proxy = rospy.ServiceProxy(target, armTargetPose)
         resp = cobra_center_proxy()
         return resp.success
     except rospy.ServiceException, e:
-        print "Service call failed: %s" % e
+        print "Service call failed: %s"%e
 
 
 def set_toroso(hight=0.01):
