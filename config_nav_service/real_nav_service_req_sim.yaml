@@ -1,0 +1,57 @@
+/nav_services:
+    nav_service:    #####  service name  #####
+        x: 0
+        y: 0
+        yaw: 0
+    elevator:    #####  service name  #####    
+        x: -2.874
+        y: 2.187
+        yaw: -1.519
+    auditorium:  #####  service name  #####
+        x: -2.023
+        y: 0.701
+        yaw: -3.127
+    corridor:       #####  service name  #####
+        x: 2.216
+        y: 0.546
+        yaw: 0.029
+    open_area:      #####  service name  #####
+        x: 1.043
+        y: 1.012
+        yaw: -3.135
+    corner_area:    #####  service name  #####
+        x: -2.248
+        y: 0.474
+        yaw: -2.498
+    near_elevator1:    #####  service name  #####
+        x: -2.874
+        y: 2.187
+        yaw: -1.519
+
+/nav_waypoint_services:
+    outside_lab211:   #####  service name  #####
+                                                                               ########################################################
+        waypoint_list: [first_point, seconde_point]    #####  Determine the order of waypoints execution  #####
+                                                                               ########################################################
+        first_point:  #####  waypoint  #####
+            x: -3.731
+            y: 2.263
+            yaw: 2.126
+        seconde_point:    #####  waypoint  #####
+            x: -4.321
+            y: 3.903
+            yaw: 1.635
+
+    lab211:   #####  service name  #####
+                                                                               ########################################################
+        waypoint_list: [first_, seconde_]    #####  Determine the order of waypoints execution  #####
+                                                                               ########################################################
+        first_point:  #####  waypoint  #####
+            x: -4.436
+            y: 4.074
+            yaw: -1.345
+        seconde_point:    #####  waypoint  #####
+            x: -3.872
+            y: 2.337
+            yaw: -0.566
+
