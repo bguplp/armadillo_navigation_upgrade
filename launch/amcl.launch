@@ -40,7 +40,7 @@
     <param name="laser_likelihood_max_dist" value="2.0"/>
     <param name="update_min_d" value="0.05"/>   <!--value="0.2"--> <!--value="0.1"-->
     <param name="update_min_a" value="0.1"/>   <!--value="0.5"--><!--value="0.2"-->
-    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_frame_id" /> <!-- This update is changed by Orel while using a real sense to better tracking-->
     <param name="resample_interval" value="2"/>
     <param name="transform_tolerance" value="0.05"/>
     <param name="recovery_alpha_slow" value="0.002"/>
