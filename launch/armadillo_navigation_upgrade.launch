@@ -8,6 +8,7 @@
     <arg name="gmapping" default="false"/>
     <arg name="hector_slam" default="false"/>
     <arg name="amcl" default="false"/>
+    <arg name="odom_frame_id" default="odom" />
 	<arg name="robot_localization" default="false"/>
     <arg name="have_map" default="false" doc="set to true to use pre-saved map"/>
     <arg name="map" default="map.yaml" doc="pre-saved map path"/>
@@ -41,6 +42,7 @@
             <arg name="x" value="$(arg x)"/>
             <arg name="y" value="$(arg y)"/>
             <arg name="Y" value="$(arg Y)"/>
+            <arg name="odom_frame_id" value="$(arg odom_frame_id)"/>
 	</include>
     </group>    
     
