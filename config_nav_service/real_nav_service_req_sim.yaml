@@ -12,8 +12,8 @@
         y: 0.701
         yaw: -3.127
     corridor:       #####  service name  #####
-        x: 2.216
-        y: 0.546
+        x: 2.0
+        y: 0.4
         yaw: 0.029
     open_area:      #####  service name  #####
         x: 1.043
@@ -25,13 +25,13 @@
         yaw: -2.498
     near_elevator1:    #####  service name  #####
         x: -2.874
-        y: 2.187
+        y: 1.5
         yaw: -1.519
 
 /nav_waypoint_services:
     outside_lab211:   #####  service name  #####
                                                                                ########################################################
-        waypoint_list: [first_point, seconde_point]    #####  Determine the order of waypoints execution  #####
+        waypoint_list: [first_point, seconde_point]                            #####  Determine the order of waypoints execution  #####
                                                                                ########################################################
         first_point:  #####  waypoint  #####
             x: -3.731
@@ -44,7 +44,7 @@
 
     lab211:   #####  service name  #####
                                                                                ########################################################
-        waypoint_list: [first_, seconde_]    #####  Determine the order of waypoints execution  #####
+        waypoint_list: [first_point, seconde_point]                            #####  Determine the order of waypoints execution  #####
                                                                                ########################################################
         first_point:  #####  waypoint  #####
             x: -4.436

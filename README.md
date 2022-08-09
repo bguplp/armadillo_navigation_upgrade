@@ -43,12 +43,12 @@ roslaunch armadillo2 armadillo2_navigetion_upgrade.launch lidar:=true gazebo:=tr
 
 to navigate through doors, use:
 ```bash
-rosrun dynamic_cfg move_base_pass_through_doors.py
+rosrun armadillo_navigation_upgrade move_base_pass_through_doors.py
 ```
 
 for basics configuration, use:
 ```bash
-rosrun dynamic_cfg move_base_basic.py
+rosrun armadillo_navigation_upgrade move_base_basic.py
 ```
 
 * use navigation_services_for_simulation.py. 
@@ -73,12 +73,12 @@ roslaunch armadillo1 armadillo1_navigetion_upgrade.launch lidar:=true gazebo:=tr
 
 to navigate through doors, use:
 ```bash
-rosrun dynamic_cfg move_base_pass_through_doors.py
+rosrun armadillo_navigation_upgrade move_base_pass_through_doors.py
 ```
 
 for basics configuration, use:
 ```bash
-rosrun dynamic_cfg move_base_basic.py
+rosrun armadillo_navigation_upgrade move_base_basic.py
 ```
 
 * use navigation_services_for_simulation.py. 
@@ -105,12 +105,12 @@ roslaunch armadillo2 armadillo2_navigetion_upgrade.launch lidar:=true world_name
 
 to navigate through doors, use:
 ```bash
-rosrun dynamic_cfg move_base_pass_through_doors.py
+rosrun armadillo_navigation_upgrade move_base_pass_through_doors.py
 ```
 
 for basics configuration, use:
 ```bash
-rosrun dynamic_cfg move_base_basic.py
+rosrun armadillo_navigation_upgrade move_base_basic.py
 ```
 
 * use navigation_services_for_simulation.py. 
@@ -135,12 +135,12 @@ roslaunch armadillo1 armadillo1_navigetion_upgrade.launch lidar:=true world_name
 
 to navigate through doors, use:
 ```bash
-rosrun dynamic_cfg move_base_pass_through_doors.py
+rosrun armadillo_navigation_upgrade move_base_pass_through_doors.py
 ```
 
 for basics configuration, use:
 ```bash
-rosrun dynamic_cfg move_base_basic.py
+rosrun armadillo_navigation_upgrade move_base_basic.py
 ```
 
 * use navigation_services_for_simulation.py. 

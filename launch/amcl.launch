@@ -2,16 +2,16 @@
 <launch>
   
   <arg name="scan" default="scan" />
-  <arg name="x" default="0.0"/>
-  <arg name="y" default="0.0"/>
-  <arg name="Y" default="0.0" />
+  <arg name="x" default="-2.689"/>
+  <arg name="y" default="-0.293"/>
+  <arg name="Y" default="-1.561315" />
   
   <node pkg="amcl" type="amcl" name="amcl">
 	<remap from="scan" to="$(arg scan)"/> 
     <param name="save_pose_rate" value="1.0"/>
-    <param name="initial_cov_xx" value="0.12"/> <!--0.1-->
-    <param name="initial_cov_yy" value="0.12"/> <!--0.1-->
-    <param name="initial_cov_aa" value="0.1"/>
+    <param name="initial_cov_xx" value="1.2"/> <!--0.12 or 0.1-->
+    <param name="initial_cov_yy" value="1.2"/> <!--0.12 or 0.1-->
+    <param name="initial_cov_aa" value="0.5"/> <!-- 0.1 -->
     <param name="use_map_topic" value="true"/>
     <param name="odom_model_type" value="diff-corrected"/>
     <param name="odom_alpha1" value="0.03"/>

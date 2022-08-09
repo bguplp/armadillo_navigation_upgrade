@@ -7,10 +7,10 @@
 	<!--common settings-->
 	<arg name="gazebo" default="false" doc="execute armadillo2 inside gazebo sim"/>
 	<arg name="world_name" default="worlds/empty.world"/>
-	<arg name="x" default="0.0"/>
-	<arg name="y" default="0.0"/>
+	<arg name="x" default="-2.689"/>
+	<arg name="y" default="-0.293"/>
 	<arg name="z" default="0.0"/>
-	<arg name="Y" default="0.0" />
+	<arg name="Y" default="-1.561315" />
 	<arg name="moveit" default="false"/>
 	<arg name="intel_cam" default="false"/>
 	<arg name="kinect" default="false"/>
