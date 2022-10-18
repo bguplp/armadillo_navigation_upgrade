@@ -96,7 +96,11 @@
         </group>
 
         <group if="$(arg kinect)">
-            <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+            <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" >
+                <arg name = "fps_limit" value="2.0" />
+                <arg name = "jpeg_quality" value = "90" />
+            </include>
+
         </group>
 
         <group if="$(arg lidar)">
